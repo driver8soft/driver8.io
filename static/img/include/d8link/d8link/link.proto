@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option go_package = "examples/link/link";
+
+package link;
+
+// The Link service definition.
+service LinkService {
+  rpc CommArea (CommReq) returns (CommResp) {}
+}
+
+// The request message containing program to link, commarea and commarea length.
+message CommReq {
+  string link_prog = 1;
+  int32 comm_len = 2;
+  bytes input_msg = 3;
+}
+
+// The response message containing commarea
+message CommResp {
+  bytes output_msg = 1;
+}

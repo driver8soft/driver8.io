@@ -65,32 +65,9 @@ cd hello
 
 4. Copy the following code into your hello.cbl file and save it.
 
-```cobol
-       IDENTIFICATION DIVISION.
-       PROGRAM-ID. hello.
-       ENVIRONMENT DIVISION.
-       CONFIGURATION SECTION.
-       DATA DIVISION.
-       WORKING-STORAGE SECTION.
-      * Declare program variables
-       LINKAGE SECTION.
-      * Data to share with COBOL subroutines 
-       01 INPUT-NAME            PIC X(10).
-       01 OUTPUT-PARM.
-               05 PARM1         PIC X(07).
-               05 PARM2         PIC X(10).
-       PROCEDURE DIVISION USING INPUT-NAME, OUTPUT-PARM.
-           MOVE "Hello," TO PARM1.
-           IF INPUT-NAME IS EQUAL TO (SPACES OR LOW-VALUES) 
-              MOVE "World"  TO PARM2
-              MOVE 2 TO RETURN-CODE
-           ELSE 
-              MOVE INPUT-NAME TO PARM2
-              MOVE 0 TO RETURN-CODE
-           END-IF.           
-           GOBACK.
-           
-```
+
+{{< readfile file="/static/img/include/hello.cbl" code="true" lang="cobol" >}}
+
 
 The COBOL program hello (COBOL subroutine) receives a &name (INPUT-NAME) and returns "Hello, &name" (OUTPUT-PARM). In case a name is not provided returns "Hello, World".
 
@@ -102,27 +79,8 @@ The COBOL program hello (COBOL subroutine) receives a &name (INPUT-NAME) and ret
 
 6. You need a main program to test your hello subroutine. Create a file launch.cbl and copy the following code:
 
+{{< readfile file="/static/img/include/launch.cbl" code="true" lang="cobol" >}}
 
-```cobol
-       IDENTIFICATION DIVISION.
-       PROGRAM-ID. launch.
-       ENVIRONMENT DIVISION.
-       CONFIGURATION SECTION.
-       DATA DIVISION.
-       WORKING-STORAGE SECTION.
-      * Declare program variables 
-       01 INPUT-NAME        PIC X(10).
-       01 OUTPUT-PARM       PIC X(17).
-       PROCEDURE DIVISION.
-      * code goes here!
-           DISPLAY "Your name: " WITH NO ADVANCING.
-           ACCEPT INPUT-NAME.
-           CALL 'hello' USING INPUT-NAME, OUTPUT-PARM.
-           DISPLAY OUTPUT-PARM.
-           DISPLAY 'Return Code: ' RETURN-CODE.
-           STOP RUN.  
-
-```
 
 7. Compile it and static linking with the subroutine 
 
@@ -326,57 +284,8 @@ Define the location of your COBOL module (hello.o) and COBOL runtime.
 
 4. This is the complete main.go code
 
-```go
-package main
+{{< readfile file="/static/img/include/greetings.go" code="true" lang="go" >}}
 
-/*
-#cgo CFLAGS: -I${SRCDIR}/include
-#cgo LDFLAGS: ${SRCDIR}/libs/hello.o -L/opt/homebrew/Cellar/gnu-cobol/3.2/lib -lcob
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include "hello.h"
-extern void cob_init(int argc,char** argv);
-*/
-import "C"
-import (
-	"net/http"
-	"unsafe"
-
-	"github.com/gin-gonic/gin"
-)
-
-func callhello(d string) string {
-
-	inputName := C.CString(d)
-	defer C.free(unsafe.Pointer(inputName))
-	outputParm := C.CString("")
-	defer C.free(unsafe.Pointer(outputParm))
-
-	returnCode := C.hello(inputName, outputParm)
-	if returnCode == 0 || returnCode == 2 {
-		return C.GoString(outputParm)
-	} else {
-		return "ERROR FROM COBOL"
-	}
-}
-
-func main() {
-	C.cob_init(C.int(0), nil)
-
-	router := gin.Default()
-	router.GET("/hello", getName)
-	router.GET("/hello/:name", getName)
-	router.Run("localhost:8080")
-}
-
-func getName(c *gin.Context) {
-	d := c.Param("name")
-	o := callhello(d)
-	c.IndentedJSON(http.StatusOK, gin.H{"output-parm": o})
-}
-
-```
 5. Copy COBOL hello.o module to your /greetings/libs directory
 
 6. Define hello.h in your /greetings/include directory

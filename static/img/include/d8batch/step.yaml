@@ -1,0 +1,15 @@
+---
+stepname: "step1"
+exec:
+  pgm: "bcuota"
+dd:
+  - name: "infile"
+    dsn: "test.txt"
+    disp: "shr"
+    normaldisp: "catlg"
+    abnormaldisp: "catlg"
+  - name: "outfile"
+    dsn: "cuota.txt"
+    disp: "new"
+    normaldisp: "catlg"
+    abnormaldisp: "delete"

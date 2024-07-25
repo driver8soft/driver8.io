@@ -14,29 +14,7 @@ En este ejemplo, crearemos un cliente Python para llamar a nuestro servicio gRPC
 
 Para ello primero necesitaremos compilar el mensaje proto para el lenguaje Python.
 
-```go
-syntax = "proto3";
-
-option go_package = "examples/hello/hello";
-
-package hello;
-
-// d8grpc hello service definition.
-service D8grpc {
-  // Sends a greeting
-  rpc Hello (MsgReq) returns (MsgRes) {}
-}
-
-// The request message containing the user's name.
-message MsgReq {
-  string hello_name = 1;
-}
-
-// The response message containing the greetings
-message MsgRes {
-  string response = 1;
-}
-```
+{{< readfile file="/static/img/include/d8grpc/hello/hello.proto" code="true" lang="proto" >}}
 
 Instale el compilador correspondiente al lenguaje [Python](https://grpc.io/docs/languages/python/quickstart/) y ejecute el siguiente comando
 

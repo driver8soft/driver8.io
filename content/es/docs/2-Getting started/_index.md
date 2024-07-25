@@ -63,32 +63,7 @@ cd hello
 
 4. Copiar el siguiente código en el fichero "hello.cbl" y guardarlo.
 
-```cobol
-       IDENTIFICATION DIVISION.
-       PROGRAM-ID. hello.
-       ENVIRONMENT DIVISION.
-       CONFIGURATION SECTION.
-       DATA DIVISION.
-       WORKING-STORAGE SECTION.
-      * Declare program variables 
-       LINKAGE SECTION.
-      * Data to share with COBOL subroutines 
-       01 INPUT-NAME            PIC X(10).
-       01 OUTPUT-PARM.
-               05 PARM1         PIC X(07).
-               05 PARM2         PIC X(10).
-       PROCEDURE DIVISION USING INPUT-NAME, OUTPUT-PARM.
-           MOVE "Hello," TO PARM1.
-           IF INPUT-NAME IS EQUAL TO (SPACES OR LOW-VALUES) 
-              MOVE "World"  TO PARM2
-              MOVE 2 TO RETURN-CODE
-           ELSE 
-              MOVE INPUT-NAME TO PARM2
-              MOVE 0 TO RETURN-CODE
-           END-IF.           
-           GOBACK.
-           
-```
+{{< readfile file="/static/img/include/hello.cbl" code="true" lang="cobol" >}}
 
 El programa COBOL "hello" (subrutina COBOL) recibe un &nombre (INPUT-NAME) y devuelve "Hello, &nombre" (OUTPUT-PARM). En caso de que &nombre no sea informado, el programa devuelve "Hello, World".
 
@@ -100,26 +75,7 @@ El programa COBOL "hello" (subrutina COBOL) recibe un &nombre (INPUT-NAME) y dev
 
 6. Ahora necesitaremos un programa principal para poder probar nuestra subrutina COBOL. Cree un fichero "launch.cbl" en el mismo directorio y copie el siguiente código:
 
-
-```cobol
-       IDENTIFICATION DIVISION.
-       PROGRAM-ID. launch.
-       ENVIRONMENT DIVISION.
-       CONFIGURATION SECTION.
-       DATA DIVISION.
-       WORKING-STORAGE SECTION.
-      * Declare program variables
-       01 INPUT-NAME        PIC X(10).
-       01 OUTPUT-PARM       PIC X(17).
-       PROCEDURE DIVISION.
-           DISPLAY "Your name: " WITH NO ADVANCING.
-           ACCEPT INPUT-NAME.
-           CALL 'hello' USING INPUT-NAME, OUTPUT-PARM.
-           DISPLAY OUTPUT-PARM.
-           DISPLAY 'Return Code: ' RETURN-CODE.
-           STOP RUN.  
-
-```
+{{< readfile file="/static/img/include/launch.cbl" code="true" lang="cobol" >}}
 
 7. Compile el programa principal y haga un linkado estático con la subrutina. 
 
@@ -327,57 +283,8 @@ Defina el directorio donde se encuentra el módulo COBOL (hello.o) y el runtime 
 
 4. A continuación el código completo del programa "main.go".
 
-```go
-package main
+{{< readfile file="/static/img/include/greetings.go" code="true" lang="go" >}}
 
-/*
-#cgo CFLAGS: -I${SRCDIR}/include
-#cgo LDFLAGS: ${SRCDIR}/libs/hello.o -L/opt/homebrew/Cellar/gnucobol/3.2/lib -lcob
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include "hello.h"
-extern void cob_init(int argc,char** argv);
-*/
-import "C"
-import (
-	"net/http"
-	"unsafe"
-
-	"github.com/gin-gonic/gin"
-)
-
-func callhello(d string) string {
-
-	inputName := C.CString(d)
-	defer C.free(unsafe.Pointer(inputName))
-	outputParm := C.CString("")
-	defer C.free(unsafe.Pointer(outputParm))
-
-	returnCode := C.hello(inputName, outputParm)
-	if returnCode == 0 || returnCode == 2 {
-		return C.GoString(outputParm)
-	} else {
-		return "ERROR FROM COBOL"
-	}
-}
-
-func main() {
-	C.cob_init(C.int(0), nil)
-
-	router := gin.Default()
-	router.GET("/hello", getName)
-	router.GET("/hello/:name", getName)
-	router.Run("localhost:8080")
-}
-
-func getName(c *gin.Context) {
-	d := c.Param("name")
-	o := callhello(d)
-	c.IndentedJSON(http.StatusOK, gin.H{"output-parm": o})
-}
-
-```
 5. Copie el módulo COBOL "hello.o" en el directorio /greetings/libs. 
 
 6. Cree un fichero "hello.h" en el directorio /greetings/include.

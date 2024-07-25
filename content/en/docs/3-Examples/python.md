@@ -14,29 +14,7 @@ In this example, we will create a Python client to call our gRPC COBOL service (
 
 To do this, we first need to compile the proto-message for the Python language.
 
-```go
-syntax = "proto3";
-
-option go_package = "examples/hello/hello";
-
-package hello;
-
-// d8grpc hello service definition.
-service D8grpc {
-  // Sends a greeting
-  rpc Hello (MsgReq) returns (MsgRes) {}
-}
-
-// The request message containing the user's name.
-message MsgReq {
-  string hello_name = 1;
-}
-
-// The response message containing the greetings
-message MsgRes {
-  string response = 1;
-}
-```
+{{< readfile file="/static/img/include/d8grpc/hello/hello.proto" code="true" lang="proto" >}}
 
 Install the compiler for the [Python language](https://grpc.io/docs/languages/python/quickstart/) and run the following command
 

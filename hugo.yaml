@@ -129,6 +129,7 @@ params:
   # Google Custom Search Engine ID. Remove or comment out to disable search.
   #gcs_engine_id: d72aa9b2712488cc3
 
+
   # Enable Lunr.js offline search
   offlineSearch: false
 
@@ -141,8 +142,10 @@ params:
 
   # User interface configuration
   ui:
+    showLightDarkModeMenu: true
     # Set to true to disable breadcrumb navigation.
-    breadcrumb_disable: false
+    breadcrumb_disable: true
+    taxonomy_breadcrumb_disable: true
     # Set to false if you don't want to display a logo (/assets/icons/logo.svg) in the top navbar
     navbar_logo: false
     # Set to true if you don't want the top navbar to be translucent when over a `block/cover`, like on the homepage.
