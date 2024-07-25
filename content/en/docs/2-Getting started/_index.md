@@ -1,7 +1,7 @@
 ---
 title: Getting Started
 description: Learn how to expose a COBOL program as a modern REST API
-categories: [Examples, Placeholders]
+categories: [Examples]
 tags: [test, docs]
 weight: 2
 ---

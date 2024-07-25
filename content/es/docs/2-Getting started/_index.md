@@ -1,7 +1,7 @@
 ---
 title: Comience a usar driver8
 description: Exponga un programa COBOL como una moderna API REST
-categories: [Examples, Placeholders]
+categories: [Examples]
 tags: [test, docs]
 weight: 2
 ---

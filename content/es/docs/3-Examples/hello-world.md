@@ -1,6 +1,6 @@
 ---
 title: Hello World
-date: 2017-01-05
+date: 2024-06-20
 description: >
   Convierta un programa COBOL en una API REST.
 categories: [Examples]

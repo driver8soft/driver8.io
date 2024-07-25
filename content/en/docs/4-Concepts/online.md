@@ -1,6 +1,6 @@
 ---
 title: Online Architecture
-date: 2017-01-05
+date: 2024-06-20
 description: >
   How do you migrate CICS/IMS transactions to microservices?
 categories: [Concepts]

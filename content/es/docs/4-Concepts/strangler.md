@@ -1,6 +1,6 @@
 ---
 title: Strangler Fig Pattern
-date: 2017-01-05
+date: 2024-06-20
 description: >
   ¿Cómo desmontar una arquitectura monolítica de manera segura?
 categories: [Concepts]

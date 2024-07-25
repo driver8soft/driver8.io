@@ -1,6 +1,6 @@
 ---
 title: Microservice model
-date: 2017-01-05
+date: 2024-06-20
 description: >
   What microservices model do we need for COBOL?
 categories: [Concepts]

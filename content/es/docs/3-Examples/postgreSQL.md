@@ -1,6 +1,6 @@
 ---
 title: Playing with PostgreSQL
-date: 2017-01-05
+date: 2024-06-20
 description: >
   Un ejemplo COBOL PostgreSQL.
 categories: [Examples]

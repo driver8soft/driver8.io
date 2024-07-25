@@ -1,7 +1,7 @@
 ---
 title: Ejemplos
 weight: 3
-date: 2017-01-05
+date: 2024-06-20
 description: Ejecute código COBOL fuera del mainframe!
 ---
 

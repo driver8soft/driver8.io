@@ -1,8 +1,8 @@
 ---
 title: d8parti
-date: 2024-06-20
+date: 2024-06-30
 description: Arquitectura batch
-author: José María Ruesta ([jmruesta@driver8soft.com](https://www.linkedin.com/in/jos%C3%A9-mar%C3%ADa-ruesta-662a8aa8/))
+author: José María Ruesta ([jmr@driver8soft.com](https://www.linkedin.com/in/jos%C3%A9-mar%C3%ADa-ruesta-662a8aa8/))
 ---
 
 La arquitectura batch sigue siendo un componente crítico en la mayoría de las empresas que usan tecnología IBM mainframe.

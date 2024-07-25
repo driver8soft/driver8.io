@@ -1,6 +1,6 @@
 ---
 title: Replicar JES
-date: 2017-01-05
+date: 2024-06-20
 description: >
  ¿Cómo replicar la funcionalidad del JES?
 categories: [Concepts]

@@ -1,6 +1,6 @@
 ---
 title: COBOL & Kafka
-date: 2017-01-05
+date: 2024-06-20
 description: >
   Convierta su programa COBOL en un Kafka consumer/producer.
 categories: [Examples]

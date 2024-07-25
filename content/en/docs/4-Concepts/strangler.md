@@ -1,6 +1,6 @@
 ---
 title: Strangler Fig Pattern
-date: 2017-01-05
+date: 2024-06-20
 description: >
   How do you safely break down a monolithic architecture?
 categories: [Concepts]

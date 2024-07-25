@@ -1,6 +1,6 @@
 ---
 title: Modelo de microservicios
-date: 2017-01-05
+date: 2024-06-20
 description: >
   ¿Qué modelo de construcción de microservicios necesitamos para ejecutar programas COBOL?
 categories: [Concepts]

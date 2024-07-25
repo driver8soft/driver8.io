@@ -1,6 +1,6 @@
 ---
 title: JCL to DAG
-date: 2017-01-05
+date: 2024-06-20
 description: >
   How to convert a JCL into a configuration file in order to run a batch program.
 categories: [Examples]

@@ -1,6 +1,6 @@
 ---
 title: Acceso a los datos
-date: 2017-01-05
+date: 22024-06-20
 description: >
  ¿Cómo acceder a los datos almacenados en ficheros y bases de datos SQL?
 categories: [Concepts]

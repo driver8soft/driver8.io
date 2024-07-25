@@ -1,6 +1,6 @@
 ---
 title: Conversión JCLs
-date: 2017-01-05
+date: 2024-06-20
 description: >
  ¿Cómo convertir un JCL mainframe en un DAG?
 categories: [Concepts]

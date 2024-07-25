@@ -1,6 +1,6 @@
 ---
 title: Batch architecture
-date: 2017-01-05
+date: 2024-06-20
 description: >
   How do you run batch processes in an open architecture?
 categories: [Concepts]

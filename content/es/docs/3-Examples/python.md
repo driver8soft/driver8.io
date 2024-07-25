@@ -1,6 +1,6 @@
 ---
 title: Python
-date: 2017-01-05
+date: 2024-06-20
 description: >
   Desea utilizar Python
 categories: [Examples]

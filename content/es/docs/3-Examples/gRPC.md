@@ -1,6 +1,6 @@
 ---
 title: COBOL gRPC server
-date: 2017-01-05
+date: 2024-06-20
 description: >
   Construya un gRPC server a partir de la COPYBOOK.
 categories: [Examples]

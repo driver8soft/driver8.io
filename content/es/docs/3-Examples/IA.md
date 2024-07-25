@@ -1,6 +1,6 @@
 ---
 title: COBOL to Go
-date: 2017-01-05
+date: 2024-06-20
 description: >
   Convierta el código COBOL a Go.
 categories: [Examples]

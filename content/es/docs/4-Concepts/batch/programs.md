@@ -1,6 +1,6 @@
 ---
 title: Compilación programas
-date: 2017-01-05
+date: 2024-06-20
 description: >
  ¿Cómo reutilizar los programas de aplicación del mainframe?
 categories: [Concepts]

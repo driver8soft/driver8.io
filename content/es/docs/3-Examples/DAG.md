@@ -1,6 +1,6 @@
 ---
 title: JCL to DAG
-date: 2017-01-05
+date: 2024-06-20
 description: >
   Transforme un JCL en un fichero de configuración para ejecutar un programa batch.
 categories: [Examples]

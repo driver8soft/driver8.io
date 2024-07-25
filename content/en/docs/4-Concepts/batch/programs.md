@@ -1,6 +1,6 @@
 ---
 title: Program compilation
-date: 2017-01-05
+date: 2024-06-20
 description: >
  How to reuse mainframe application programs?
 categories: [Concepts]

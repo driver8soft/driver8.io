@@ -1,6 +1,6 @@
 ---
 title: Data access
-date: 2017-01-05
+date: 2024-06-20
 description: >
  How to access data stored in SQL files and databases?
 categories: [Concepts]

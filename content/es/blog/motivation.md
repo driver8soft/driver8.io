@@ -1,7 +1,7 @@
 ---
 date: 2024-06-20
 title: Presentación driver8
-author: José María Ruesta ([jmruesta@driver8soft.com](https://www.linkedin.com/in/jos%C3%A9-mar%C3%ADa-ruesta-662a8aa8/))
+author: José María Ruesta ([jmr@driver8soft.com](https://www.linkedin.com/in/jos%C3%A9-mar%C3%ADa-ruesta-662a8aa8/))
 ---
 
 La tecnología IBM Mainframe ha sido extremadamente relevante en distintos sectores de la economía desde los años 70 del siglo pasado.

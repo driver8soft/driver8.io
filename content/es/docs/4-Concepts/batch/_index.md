@@ -1,6 +1,6 @@
 ---
 title: Arquitectura Batch
-date: 2017-01-05
+date: 2024-06-20
 description: >
   ¿Cómo ejecutar procesos Batch en una arquitectura open?
 categories: [Concepts]

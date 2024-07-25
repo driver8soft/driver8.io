@@ -1,6 +1,6 @@
 ---
 title: Arquitectura Online
-date: 2017-01-05
+date: 2024-06-20
 description: >
   ¿Cómo migrar las transacciones CICS/IMS a microservicios?
 categories: [Concepts]
