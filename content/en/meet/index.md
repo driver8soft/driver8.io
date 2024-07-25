@@ -24,7 +24,7 @@ If you wish to test the capabilities of driver8 on your production software by r
 
 #### Dear Developer:
 
-We appreciate that it is not common to own an IBM mainframe on which you can test on an individual or private level.
+We recognise that it is not typical for individuals to own an IBM mainframe on which they can conduct tests.
 
 If your company or organisation is interested in collaborating on the development of the project, we would be pleased to hear from you.
 
@@ -36,7 +36,7 @@ If your company or organisation is interested in collaborating on the developmen
 
 
 {{% blocks/feature icon="fa-solid fa-graduation-cap" title="Learn & Connect" %}}
-¿Desea realizar un piloto utilizando driver8?
+Want to run a pilot with driver8?
 
 user@driver8soft.com
 
@@ -44,7 +44,7 @@ user@driver8soft.com
 
 
 {{% blocks/feature icon="fa-solid fa-code-fork" title="Develop & Contribute" %}}
-¿Quiere colaborar en el proyecto?
+Do you want to contribute to the project?
 
 developer@driver8soft.com
  
@@ -52,9 +52,9 @@ developer@driver8soft.com
 
 
 {{% blocks/feature icon="fa-solid fa-university" title="Partnership" %}}
-¿Desea que su solución se integre en driver8?
+Would you like your solution to be integrated into Driver8?
 
-partner@driver8soft.com
+
  
 {{% /blocks/feature %}}
 

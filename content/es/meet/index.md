@@ -54,7 +54,7 @@ developer@driver8soft.com
 {{% blocks/feature icon="fa-solid fa-university" title="Partnership" %}}
 ¿Desea que su solución se integre en driver8?
 
-partner@driver8soft.com
+
  
 {{% /blocks/feature %}}
 
