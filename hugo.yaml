@@ -13,10 +13,12 @@ enableMissingTranslationPlaceholders: true
 enableRobotsTXT: true
 
 # Will give values to .Lastmod etc.
-enableGitInfo: true
+enableGitInfo: false
 
 # Comment out to enable taxonomies in Docsy
-# disableKinds: [taxonomy, taxonomyTerm]
+disableKinds:
+  - taxonomy
+  - term
 
 # You can add your own taxonomies
 taxonomies:
@@ -40,7 +42,7 @@ permalinks:
 imaging:
   resampleFilter: CatmullRom
   quality: 75
-  anchor: smart
+  anchor: Smart
 
 # Language configuration
 languages:
@@ -82,13 +84,13 @@ outputs:
 params:
   taxonomy:
     # set taxonomyCloud = [] to hide taxonomy clouds
-    taxonomyCloud: [tags, categories]
+    taxonomyCloud: []
 
     # If used, must have same length as taxonomyCloud
-    taxonomyCloudTitle: [Tag Cloud, Categories]
+    taxonomyCloudTitle: []
 
     # set taxonomyPageHeader = [] to hide taxonomies on the page headers
-    taxonomyPageHeader: [tags, categories]
+    taxonomyPageHeader: []
 
   #privacy_policy: https://policies.google.com/privacy
 
@@ -117,7 +119,7 @@ params:
   github_repo: https://github.com/driver8soft/driver8.io
 
   # An optional link to a related project repo. For example, the sibling repository where your product code lives.
-  github_project_repo: https://github.com/driver8soft/examples
+  #github_project_repo: https://github.com/driver8soft
 
   # Specify a value here if your content directory is not in your repo's root directory
   # github_subdir: ""
