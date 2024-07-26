@@ -11,48 +11,38 @@ package main
 import "C"
 import (
 	"errors"
-	"flag"
 	"fmt"
-	"io"
 	"log"
 	"os"
 	"time"
 	"unsafe"
 
-	"gopkg.in/yaml.v3"
+	"github.com/spf13/viper"
 )
 
-type Step struct {
-	Stepname string `yaml:"stepname"`
-	Exec     Exec
-	Dd       []Dd
+type step struct {
+	Stepname string `mapstructure:"stepname"`
+	Exec     exec
+	Dd       []dd
+}
+type exec struct {
+	Pgm string `mapstructure:"pgm"`
+}
+type dd struct {
+	Name         string `mapstructure:"name"`
+	Dsn          string `mapstructure:"dsn"`
+	Disp         string `mapstructure:"disp"`
+	Normaldisp   string `mapstructure:"normaldisp"`
+	Abnormaldisp string `mapstructure:"abnormaldisp"`
 }
 
-type Exec struct {
-	Pgm string `yaml:"pgm"`
-}
-
-type Dd struct {
-	Name         string `yaml:"name"`
-	Dsn          string `yaml:"dsn"`
-	Disp         string `yaml:"disp"`
-	Normaldisp   string `yaml:"normaldisp"`
-	Abnormaldisp string `yaml:"abnormaldisp"`
-}
-
-var step Step
-
-var (
-	stepname = flag.String("stepname", "step.yaml", "Name of yaml step exec")
-)
+var Step *step
 
 func cobInit() {
 	C.cob_init(C.int(0), nil)
 	log.Println("INFO: gnucobol initialized")
 }
-
 func cobCall(p string) (ret int, err error) {
-
 	c_progName := C.CString(p)
 	defer C.free(unsafe.Pointer(c_progName))
 
@@ -66,77 +56,57 @@ func cobCall(p string) (ret int, err error) {
 		return int(r), nil
 
 	}
-
 }
 func cobStop(ret int) {
 	C.cob_stop_run(C.int(ret))
 }
-
-func config(s string) error {
-	configFile, err := os.Open(s)
-	if err != nil {
-		return err
-	}
-	log.Println("INFO: Successfully opened config yaml file")
-	defer configFile.Close()
-
-	data, _ := io.ReadAll(configFile)
-
-	err = yaml.Unmarshal(data, &step)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
-
 func main() {
 	start := time.Now()
-	flag.Parse()
+
 	cobInit()
 
-	//Read yaml config file
-	err := config(*stepname)
-	if err != nil {
-		log.Printf("ERROR: Reading config file %s. %s", *stepname, err)
-		os.Exit(12)
+	// Read yaml config file
+	viper.SetConfigName("step")
+	viper.SetConfigType("yaml")
+	viper.AddConfigPath(".")
+	if err := viper.ReadInConfig(); err != nil {
+		fmt.Println(err)
 	}
-
-	//Create Symlink
-	for i := 0; i < len(step.Dd); i++ {
-		err := os.Symlink(step.Dd[i].Dsn, step.Dd[i].Name)
+	// Unmarshal yaml config file
+	if err := viper.Unmarshal(&Step); err != nil {
+		fmt.Println(err)
+	}
+	// Create Symlink
+	for i := 0; i < len(Step.Dd); i++ {
+		err := os.Symlink(Step.Dd[i].Dsn, Step.Dd[i].Name)
 		if err != nil {
 			switch {
 			case os.IsExist(err):
-				/*DDNAME already exist */
-				log.Printf("ERROR: DDNAME=%s already exists. %s", step.Dd[i].Name, err)
+				// DDNAME already exist
+				log.Printf("INFO: DDNAME=%s already exists. %s", Step.Dd[i].Name, err)
 			case !os.IsExist(err):
-				/*DDNAME invalid */
-				log.Printf("ERROR: DDNAME=%s invalid ddname. %s", step.Dd[i].Name, err)
+				// DDNAME invalid
+				log.Printf("ERROR: DDNAME=%s invalid ddname. %s", Step.Dd[i].Name, err)
+				os.Exit(04)
 			default:
 				log.Println(err)
 			}
-			os.Exit(04)
 		}
 	}
-	//Call COBOL program -> EXEC PGM defined in JCL
-	ret, err := cobCall(step.Exec.Pgm)
+	// Call COBOL program -> EXEC PGM defined in JCL
+	ret, err := cobCall(Step.Exec.Pgm)
 	if err != nil {
 		fmt.Println(err)
 	}
-
-	//Delete Symlink
-	for i := 0; i < len(step.Dd); i++ {
-		err := os.Remove(step.Dd[i].Name)
+	// Delete Symlink
+	for i := 0; i < len(Step.Dd); i++ {
+		err := os.Remove(Step.Dd[i].Name)
 		if err != nil {
-			log.Printf("INFO: DDNAME=%s does not exists. %s", step.Dd[i].Name, err)
-
+			log.Printf("INFO: DDNAME=%s does not exists. %s", Step.Dd[i].Name, err)
 		}
 	}
-
 	elapsed := time.Since(start)
-	log.Printf("INFO: %s elapsed time %s", step.Exec.Pgm, elapsed)
+	log.Printf("INFO: %s elapsed time %s", Step.Exec.Pgm, elapsed)
 
 	cobStop(ret)
-
 }
