@@ -6,7 +6,7 @@ title: driver8
 <a class="btn btn-lg btn-primary me-3 mb-4" href="/es/docs/">
   Documentación 
 </a>
-<a class="btn btn-lg btn-secondary me-3 mb-4" href="/es/docs/2-Getting-started/">
+<a class="btn btn-lg btn-secondary me-3 mb-4" href="/es/docs/2-getting-started/">
   Comenzar <i class="fas fa-arrow-alt-circle-right ms-2"></i>
 </a>
 <p class="lead mt-5">Despliegue su código mainframe  &mdash; en la cloud!</p>

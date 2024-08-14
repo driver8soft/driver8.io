@@ -14,9 +14,9 @@
        DATA DIVISION.
        FILE SECTION.
        WORKING-STORAGE SECTION.
-      * In COBOL, you declare variables in the WORKING-STORAGE section
+      * Declare program variables
        01  WS-MSG.
-           05 WS-ERROR      PIC X(01) VALUE 'N'.
+           05 WS-ERROR      PIC X(01).
            05 WS-MSG00      PIC X(20) VALUE 'OK'.
            05 WS-MSG10      PIC X(20) VALUE 'INVALID INT. RATE'.
            05 WS-MSG12      PIC X(20) VALUE 'INVALID NUMBER YEARS'.
@@ -40,7 +40,8 @@
        PROCEDURE DIVISION USING BY REFERENCE LOAN-PARAMS. 
       * code goes here!
        
-       000-MAIN.   
+       000-MAIN.  
+           MOVE "N" TO WS-ERROR. 
            DISPLAY "PRIN-AMT: " PRIN-AMT.  
            DISPLAY "INT-RATE: " INT-RATE.
            DISPLAY "TIMEYR: "   TIMEYR.    

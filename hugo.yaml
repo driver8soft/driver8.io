@@ -3,6 +3,13 @@ title: driver8
 
 # cSpell:ignore goldmark github hugo readingtime docsy subdir lastmod pygments linenos catmullrom norsk gu
 
+deployment:
+  targets:
+# An arbitrary name for this target.
+    name: "production"
+# Google Cloud Storage -- see https://gocloud.dev/howto/blob/#gcs
+    URL: "gs://driver8.io"
+
 # Language settings
 contentDir: content/en
 defaultContentLanguage: en

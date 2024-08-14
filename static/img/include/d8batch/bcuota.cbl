@@ -50,7 +50,7 @@
                    10 ERROR-MSG     PIC X(20).
 
        PROCEDURE DIVISION.
-
+ 
            OPEN INPUT LOAN.
            OPEN OUTPUT CUOTA.
            PERFORM UNTIL WS-EOF='Y'

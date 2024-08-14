@@ -22,7 +22,7 @@ import (
 	"time"
 	"unsafe"
 
-	pb "examples/link/link"
+	pb "github.com/driver8soft/examples/d8link/link"
 
 	"google.golang.org/grpc"
 )
@@ -38,14 +38,14 @@ type server struct {
 func (s *server) CommArea(ctx context.Context, in *pb.CommReq) (out *pb.CommResp, err error) {
 	start := time.Now()
 
-	//remove trailing spaces from program name
+	// remove trailing spaces from program name
 	program := strings.TrimSpace(in.GetLinkProg())
 	c_program := C.CString(program)
 	defer C.free(unsafe.Pointer(c_program))
 
 	c_commlen := C.int(in.GetCommLen())
 
-	//allocate argc & argv variables
+	// allocate argc & argv variables
 	c_argc := C.int(1)
 	c_argv := (*[0xfff]*C.char)(C.allocArgv(c_argc))
 	defer C.free(unsafe.Pointer(c_argv))
@@ -53,7 +53,7 @@ func (s *server) CommArea(ctx context.Context, in *pb.CommReq) (out *pb.CommResp
 	c_argv[0] = C.CString(string(in.GetInputMsg()))
 	defer C.free(unsafe.Pointer(c_argv[0]))
 
-	//check COBOL program
+	// check COBOL program
 	n := C.cob_resolve(c_program)
 	if n == nil {
 		log.Println("ERROR: Module not found. Program name =", program)
@@ -73,7 +73,8 @@ func (s *server) CommArea(ctx context.Context, in *pb.CommReq) (out *pb.CommResp
 
 func main() {
 	flag.Parse()
-	//D8 Initialize gnucobol
+
+	// d8 Initialize gnucobol
 	C.cob_init(C.int(0), nil)
 
 	lis, err := net.Listen("tcp", fmt.Sprintf(":%d", *port))
@@ -81,10 +82,10 @@ func main() {
 		log.Fatalf("ERROR: failed to listen: %v", err)
 	}
 
-	s := grpc.NewServer()
-	pb.RegisterLinkServiceServer(s, &server{})
+	grpcServer := grpc.NewServer()
+	pb.RegisterLinkServiceServer(grpcServer, &server{})
 	log.Printf("INFO: server listening at %v", lis.Addr())
-	if err := s.Serve(lis); err != nil {
+	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("ERROR: failed to serve: %v", err)
 	}
 }

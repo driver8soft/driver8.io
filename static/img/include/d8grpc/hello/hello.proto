@@ -1,8 +1,7 @@
 
-
 syntax = "proto3";
 
-option go_package = "examples/hello/hello";
+option go_package = "github.com/driver8soft/examples/d8grpc/hello";
 
 package hello;
 

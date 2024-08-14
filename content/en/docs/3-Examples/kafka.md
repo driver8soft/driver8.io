@@ -17,7 +17,7 @@ From the COBOL program, we will make a call to the D8kafka module and pass it:
 * The Kafka _topic_
 * A comma-separated list of values (key : value)
 
-{{< readfile file="/static/img/include/d8kafka/cuota.cbl" code="true" lang="cobol" >}}
+{{< readfile file="/static/img/include/d8kafka/cuotak.cbl" code="true" lang="cobol" >}}
 
 A simplified example of _d8kafka_ is shown below.
 

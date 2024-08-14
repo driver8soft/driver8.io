@@ -10,7 +10,6 @@ package main
 */
 import "C"
 import (
-	"errors"
 	"fmt"
 	"log"
 	"os"
@@ -38,43 +37,17 @@ type dd struct {
 
 var Step *step
 
-func cobInit() {
-	C.cob_init(C.int(0), nil)
-	log.Println("INFO: gnucobol initialized")
-}
-func cobCall(p string) (ret int, err error) {
-	c_progName := C.CString(p)
-	defer C.free(unsafe.Pointer(c_progName))
-
-	n := C.cob_resolve(c_progName)
-	if n == nil {
-		return 12, errors.New("ERROR: Module not found")
-	} else {
-		log.Printf("INFO: PGM=%s started", p)
-		r := C.cob_call(c_progName, C.int(0), nil)
-		log.Printf("INFO: %s return-code %v", p, ret)
-		return int(r), nil
-
-	}
-}
-func cobStop(ret int) {
-	C.cob_stop_run(C.int(ret))
-}
-func main() {
-	start := time.Now()
-
-	cobInit()
-
+func config() error {
 	// Read yaml config file
 	viper.SetConfigName("step")
 	viper.SetConfigType("yaml")
 	viper.AddConfigPath(".")
 	if err := viper.ReadInConfig(); err != nil {
-		fmt.Println(err)
+		return err
 	}
 	// Unmarshal yaml config file
 	if err := viper.Unmarshal(&Step); err != nil {
-		fmt.Println(err)
+		return err
 	}
 	// Create Symlink
 	for i := 0; i < len(Step.Dd); i++ {
@@ -84,29 +57,80 @@ func main() {
 			case os.IsExist(err):
 				// DDNAME already exist
 				log.Printf("INFO: DDNAME=%s already exists. %s", Step.Dd[i].Name, err)
-			case !os.IsExist(err):
+			case os.IsNotExist(err):
 				// DDNAME invalid
 				log.Printf("ERROR: DDNAME=%s invalid ddname. %s", Step.Dd[i].Name, err)
-				os.Exit(04)
+				return err
 			default:
 				log.Println(err)
+				return err
 			}
 		}
 	}
-	// Call COBOL program -> EXEC PGM defined in JCL
-	ret, err := cobCall(Step.Exec.Pgm)
-	if err != nil {
-		fmt.Println(err)
+	return nil
+}
+
+func cobCall(p string) error {
+	defer delSymlink()
+	c_progName := C.CString(p)
+	defer C.free(unsafe.Pointer(c_progName))
+
+	n := C.cob_resolve(c_progName)
+	if n == nil {
+		return fmt.Errorf("ERROR: Program %s not found", p)
+	} else {
+		log.Printf("INFO: PGM=%s started", p)
+		r := C.cob_call_with_exception_check(c_progName, C.int(0), nil)
+		rc := int(C.cob_last_exit_code())
+		err := C.GoString(C.cob_last_runtime_error())
+		switch int(r) {
+		case 0:
+			log.Printf("INFO: program %s exited with return-code: %v", p, rc)
+			C.cob_tidy()
+		case 1:
+			log.Printf("INFO: program %s STOP RUN with return-code: %v", p, rc)
+		case -1:
+			return fmt.Errorf("ERROR: program %s exit with return-code: %v and error: %s", p, rc, err)
+		case -2:
+			return fmt.Errorf("FATAL: program %s exit with return-code: %v and error: %s", p, rc, err)
+		case -3:
+			return fmt.Errorf("ERROR: program %s signal handler exit with signal: %v and error: %s", p, rc, err)
+		default:
+			return fmt.Errorf("ERROR: program %s unexpected return exit code: %v and error: %s", p, rc, err)
+		}
+		return nil
 	}
-	// Delete Symlink
+}
+
+func delSymlink() {
 	for i := 0; i < len(Step.Dd); i++ {
 		err := os.Remove(Step.Dd[i].Name)
 		if err != nil {
 			log.Printf("INFO: DDNAME=%s does not exists. %s", Step.Dd[i].Name, err)
 		}
 	}
+}
+
+func main() {
+	start := time.Now()
+
+	// Initialize gnucobol
+	C.cob_init(C.int(0), nil)
+	log.Println("INFO: gnucobol initialized")
+
+	// Load config file
+	if err := config(); err != nil {
+		log.Printf("ERROR: reading yaml config file. %s", err)
+		os.Exit(12)
+	}
+
+	// Call COBOL program -> EXEC PGM defined in JCL
+	if err := cobCall(Step.Exec.Pgm); err != nil {
+		log.Println(err)
+		os.Exit(12)
+	}
+
 	elapsed := time.Since(start)
 	log.Printf("INFO: %s elapsed time %s", Step.Exec.Pgm, elapsed)
 
-	cobStop(ret)
 }

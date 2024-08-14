@@ -7,7 +7,7 @@ package main
 import "C"
 import (
 	"encoding/json"
-	"log"
+	"fmt"
 	"os"
 	"strings"
 
@@ -22,8 +22,6 @@ type Kdata struct {
 //export D8kafka
 func D8kafka(c_topic *C.char, c_key *C.char, c_value *C.char) C.int {
 
-	logger := log.New(os.Stdout, "INFO: ", log.Ldate|log.Ltime)
-
 	keys := strings.Split(C.GoString(c_key), ",")
 	values := strings.Split(C.GoString(c_value), ",")
 
@@ -37,11 +35,11 @@ func D8kafka(c_topic *C.char, c_key *C.char, c_value *C.char) C.int {
 
 	p, err := kafka.NewProducer(&kafka.ConfigMap{
 		"bootstrap.servers": "localhost:29092",
-		"client.id":         "cuota",
+		"client.id":         "client",
 		"acks":              "all"},
 	)
 	if err != nil {
-		logger.Fatalf("Failed to create producer: %s\n", err)
+		fmt.Printf("ERROR: Failed to create producer: %s\n", err)
 		os.Exit(1)
 	}
 
@@ -55,10 +53,20 @@ func D8kafka(c_topic *C.char, c_key *C.char, c_value *C.char) C.int {
 		delivery_chan,
 	)
 	if err != nil {
-		logger.Fatalf("Failed to produce message: %s\n", err)
+		fmt.Printf("ERROR: Failed to produce message: %s\n", err)
 		os.Exit(1)
 	}
-	<-delivery_chan
+
+	e := <-delivery_chan
+	m := e.(*kafka.Message)
+
+	if m.TopicPartition.Error != nil {
+		fmt.Printf("ERROR: Delivery failed: %v\n", m.TopicPartition.Error)
+	} else {
+		fmt.Printf("INFO: Delivered message to topic %s [%d] at offset %v\n",
+			*m.TopicPartition.Topic, m.TopicPartition.Partition, m.TopicPartition.Offset)
+	}
+	close(delivery_chan)
 
 	return 0
 }

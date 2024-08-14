@@ -22,7 +22,7 @@ import (
 	"time"
 	"unsafe"
 
-	pb "examples/hello/hello"
+	pb "github.com/driver8soft/examples/d8grpc/hello"
 
 	"google.golang.org/grpc"
 )
@@ -77,10 +77,13 @@ func main() {
 		log.Fatalf("ERROR: failed to listen: %v", err)
 	}
 
-	s := grpc.NewServer()
-	pb.RegisterD8GrpcServer(s, &server{})
+	var opts []grpc.ServerOption
+
+	grpcServer := grpc.NewServer(opts...)
+
+	pb.RegisterD8GrpcServer(grpcServer, &server{})
 	log.Printf("INFO: server listening at %v", lis.Addr())
-	if err := s.Serve(lis); err != nil {
+	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("ERROR: failed to serve: %v", err)
 	}
 }

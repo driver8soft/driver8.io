@@ -1,12 +1,12 @@
       ******************************************************************
       *
-      * Loan Calculator kafka
+      * Loan kafka producer
       * ==========================
       *
       *
       ******************************************************************
        IDENTIFICATION DIVISION.
-       PROGRAM-ID. cuota.
+       PROGRAM-ID. cuotak.
        ENVIRONMENT DIVISION.
  
        DATA DIVISION.

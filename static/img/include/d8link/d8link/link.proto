@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-option go_package = "examples/link/link";
+option go_package = "github.com/driver8soft/examples/d8link/link";
 
 package link;
 

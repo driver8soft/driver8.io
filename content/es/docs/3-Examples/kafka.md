@@ -17,7 +17,7 @@ Desde el programa COBOL realizaremos una llamada al módulo D8kafka pasándole:
 * El _topic_ Kafka
 * Una lista de valores (key : value) separados por comas
 
-{{< readfile file="/static/img/include/d8kafka/cuota.cbl" code="true" lang="cobol" >}}
+{{< readfile file="/static/img/include/d8kafka/cuotak.cbl" code="true" lang="cobol" >}}
 
 A continuación se muestra una versión simplificada de ejemplo del módulo _d8kafka_
 

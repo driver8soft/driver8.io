@@ -6,7 +6,7 @@ title: driver8
 <a class="btn btn-lg btn-primary me-3 mb-4" href="/docs/">
   Learn More
 </a>
-<a class="btn btn-lg btn-secondary me-3 mb-4" href="/docs/2-Getting-started/">
+<a class="btn btn-lg btn-secondary me-3 mb-4" href="/docs/2-getting-started/">
   Quickstart <i class="fas fa-arrow-alt-circle-right ms-2"></i>
 </a>
 <p class="lead mt-5">Deploy your IBM mainframe code &mdash; in the cloud!</p>

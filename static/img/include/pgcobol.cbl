@@ -1,6 +1,6 @@
       *****************************************************************
-      * Connect and get data from Postgres
-      * Sample postgre DB "dvdrental" table "actor"
+      * Connect and get data from PostgreSQL
+      * Sample DB "dvdrental" table "actor"
       *****************************************************************
        IDENTIFICATION DIVISION.
        PROGRAM-ID. pgcobol.
@@ -10,12 +10,12 @@
       
       * CONNECT TO POSGRESQL 
        01 CONN-STR.
-          05 FILLER      PIC X(17) VALUE "dbname=dvdrental ".
-          05 FILLER      PIC X(14) VALUE "user=XXXXXXXX ".
-          05 FILLER      PIC X(17) VALUE "password=XXXXXXX ".
-          05 FILLER      PIC X(15) VALUE "host=localhost ".
-          05 FILLER      PIC X(10) VALUE "port=5432 ".
-          05 FILLER      PIC X(16) VALUE "sslmode=disable ".
+          05 FILLER      PIC X(20) VALUE "dbname=dvdrental    ".
+          05 FILLER      PIC X(20) VALUE "user=XXXXXXXX       ".
+          05 FILLER      PIC X(20) VALUE "password=XXXXXXX    ".
+          05 FILLER      PIC X(20) VALUE "host=localhost      ".
+          05 FILLER      PIC X(20) VALUE "port=5432           ".
+          05 FILLER      PIC X(20) VALUE "sslmode=disable     ".
           05 FILLER      PIC X(01) VALUE LOW-VALUES.
        01 CONNECTION         USAGE POINTER.
        01 CONN-STATUS        USAGE BINARY-LONG.
