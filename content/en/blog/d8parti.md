@@ -11,7 +11,7 @@ While other processing models (e.g. asynchronous event-driven architectures) are
 
 This guide will show you how to efficiently bring mainframe batch processing to Kubernetes.
 
-Download now. ["d8parti: IBM Mainframe Batch"](/img/others/D8parti-en-v1.pdf) 
+Download now. ["d8parti: IBM Mainframe Batch"](/img/others/d8parti-en-v1.pdf) 
 
 ![](/img/others/d8parti.jpeg)
 _How to dismantle an IBM mainframe_

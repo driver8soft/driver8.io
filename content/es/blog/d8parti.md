@@ -9,7 +9,7 @@ La arquitectura batch sigue siendo un componente crítico en la mayoría de las 
 
 Aunque la tendencia es eliminar este tipo de arquitectura mediante la adopción de otros modelos de proceso (por ejemplo, arquitecturas asíncronas basadas en eventos), el procesamiento Batch o por lotes sigue siendo un modelo extremadamente eficiente que no debe descartarse y que forma el núcleo de los procesos contables en la mayoría de las instituciones financieras de mediano/gran tamaño.
 
-¿Cómo llevar el procesamiento batch mainframe a Kubernetes de manera eficiente? Descarguese ["d8parti: IBM Mainframe Batch"](/img/others/D8parti-es-v1.pdf) 
+¿Cómo llevar el procesamiento batch mainframe a Kubernetes de manera eficiente? Descarguese ["d8parti: IBM Mainframe Batch"](/img/others/d8parti-es-v1.pdf) 
 
 ![](/img/others/d8parti.jpeg)
 _Cómo desmontar un mainframe IBM_

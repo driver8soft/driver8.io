@@ -1,7 +1,7 @@
 ---
 date: 2024-06-20
 title: driver8 Motivation
-author: José María Ruesta ([jmruesta@driver8soft.com](https://www.linkedin.com/in/jos%C3%A9-mar%C3%ADa-ruesta-662a8aa8/))
+author: José María Ruesta ([jmr@driver8soft.com](https://www.linkedin.com/in/jos%C3%A9-mar%C3%ADa-ruesta-662a8aa8/))
 ---
 
 Since the 1970s, IBM mainframe technology has been extremely important in various sectors of the economy.
