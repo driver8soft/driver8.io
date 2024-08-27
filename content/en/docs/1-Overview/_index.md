@@ -66,7 +66,7 @@ Use the following list to identify the best candidates for migration;
  
 ##### Application Inventory
 
-The existence of thousands of components (fonts, copies, JCLs, etc.) in the mainframe change management tool does not mean that all of these components are still in use. 
+The existence of thousands of components (source code, copies, JCLs, etc.) in the mainframe change management tool does not mean that all of these components are still in use. 
 
 Define the scope of the project by creating a detailed inventory of active software components.
 
