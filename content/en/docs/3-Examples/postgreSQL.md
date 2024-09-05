@@ -1,6 +1,6 @@
 ---
 title: Playing with PostgreSQL
-date: 2024-06-20
+date: 2024-09-05
 description: >
   A COBOL PostgreSQL example.
 categories: [Examples]
@@ -10,11 +10,12 @@ weight: 30
 
 Is COBOL only valid for accessing DB2?
 
-In this simple example, we will access a PostgreSQL database from a COBOL program. 
+In this simple example, we will access a PostgreSQL database from a COBOL program, using direct calls to its library. 
 
-> Your programs can be precompiled (EXEC SQL) to access various SQL databases. 
+> As an alternative, your programs can be precompiled (EXEC SQL) to access various SQL databases.  
+> This needs an additional precompiler.   
 
-To run this program, you need to install PostgreSQL and create the sample database (dvdrental). Instructions on how to do this can be found [here] (https://www.postgresql.org/download/). 
+To run this program, you need to install PostgreSQL and create the sample database (dvdrental). Instructions on how to do this can be found [here](https://www.postgresql.org/download/). 
 
 {{< readfile file="/static/img/include/pgcobol.cbl" code="true" lang="cobol" >}}
 
