@@ -320,7 +320,7 @@ The following explains how to run the above test program.
 
 The examples can be downloaded directly from the [GitHub](https://github.com/driver8soft/d8-examples.git) repo.
 
-The directory structure of the example is as follows:
+The directory structure of the example (**d8vars**) is as follows:
 
 ```
 ├── cmd

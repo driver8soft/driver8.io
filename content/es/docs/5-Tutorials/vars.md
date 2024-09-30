@@ -324,7 +324,7 @@ A continuación se explica cómo ejecutar el programa de pruebas anterior.
 
 Los ejemplos pueden descargarse directamente del repo de [GitHub](https://github.com/driver8soft/d8-examples.git)
 
-La estructura de directorios del ejemplo, es la siguiente:
+La estructura de directorios del ejemplo (**d8vars**), es la siguiente:
 
 ```
 ├── cmd
