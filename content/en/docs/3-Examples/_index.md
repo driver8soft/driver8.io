@@ -9,6 +9,8 @@ Here is a set of sample programs that will allow you to technically validate the
 
 The code has been simplified to make it understandable to anyone with minimal programming skills.
 
+You can download the code from the following project at [GitHub](https://github.com/driver8soft/d8-examples.git)
+
 
 {{< alert title="Want to pilot driver8 with your programs?" >}}Please contact us.{{< /alert >}}
 

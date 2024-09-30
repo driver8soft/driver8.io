@@ -1,0 +1,72 @@
+---
+copy:
+  - field: "Char"
+    type: 9
+    length: 9
+    decimal: 0
+    sign: false
+  - field: "Comp2"
+    type: 2
+    length: 0
+    decimal: 0
+    sign: true
+  - field: "Comp1"
+    type: 1
+    length: 0
+    decimal: 0
+    sign: true
+  - field: "Comp5Double"
+    type: 5
+    length: 18
+    decimal: 0
+    sign: true
+  - field: "Comp5Long"
+    type: 5
+    length: 9
+    decimal: 0
+    sign: true
+  - field: "Comp5Short"
+    type: 5
+    length: 4
+    decimal: 0
+    sign: true
+  - field: "Comp5Udouble"
+    type: 5
+    length: 18
+    decimal: 0
+    sign: false
+  - field: "Comp5Ulong"
+    type: 5
+    length: 9
+    decimal: 0
+    sign: false
+  - field: "Comp5Ushort"
+    type: 5
+    length: 4
+    decimal: 0
+    sign: false
+  - field: "NumDisplay"
+    type: 0
+    length: 5
+    decimal: 2
+    sign: true
+  - field: "Comp3"
+    type: 3
+    length: 5
+    decimal: 2
+    sign: true
+  - field: "CompDouble"
+    type: 4
+    length: 10
+    decimal: 2
+    sign: true
+  - field: "CompLong"
+    type: 4
+    length: 5
+    decimal: 2
+    sign: true
+  - field: "CompShort"
+    type: 4
+    length: 4
+    decimal: 2
+    sign: true

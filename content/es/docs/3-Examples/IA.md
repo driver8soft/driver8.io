@@ -23,28 +23,26 @@ Una primera aproximación pasa por mantener la estructura del código COBOL:
 * Por último, las variables de la LINKAGE SECTION definen los parámetros de la función principal y se comparten (puntero) entre todas las funciones
 
 ```go
-/// Declare variables in the working storage section
+// Declare variables in the working storage section
 var (
 	WS_ERROR     string
 	WS_MSG00     string = "OK"
 	WS_MSG10     string = "INVALID INT. RATE"
 	WS_MSG12     string = "INVALID NUMBER YEARS"
-	MONTHLY_RATE float32
-	AUX_X        float32
-	AUX_Y        float32
-	AUX_Z        float32
+	MONTHLY_RATE float64
+	AUX_X        float64
+	AUX_Y        float64
+	AUX_Z        float64
 )
-
 // Data to share with COBOL subroutines
 type LoanParams struct {
-	PrinAmt  float32
-	IntRate  float32
+	PrinAmt  float64
+	IntRate  float64
 	TimeYr   int32
-	Payment  float32
+	Payment  float64
 	ErrorMsg string
 }
-
-func loancalc(amount float32, interest float32, nyears int32) (payment float32, errmsg string) {
+func loancalc(amount float64, interest float64, nyears int32) (payment float64, errmsg string) {
 	WS_ERROR = "N"
 
 	loanParams := LoanParams{
@@ -65,7 +63,6 @@ func loancalc(amount float32, interest float32, nyears int32) (payment float32, 
 
 	return loanParams.Payment, loanParams.ErrorMsg
 }
-
 func initial(loanParams *LoanParams) {
 	if loanParams.IntRate <= 0 {
 		loanParams.ErrorMsg = WS_MSG10
@@ -77,12 +74,11 @@ func initial(loanParams *LoanParams) {
 		}
 	}
 }
-
 func process(loanParams *LoanParams) {
 	MONTHLY_RATE = loanParams.IntRate / 12 / 100
-	AUX_X = float32(math.Pow(float64(1+MONTHLY_RATE), float64(loanParams.TimeYr*12)))
-	AUX_Y = float32(AUX_X) * MONTHLY_RATE
-	AUX_Z = float32(AUX_X-1) / AUX_Y
+	AUX_X = math.Pow((1 + MONTHLY_RATE), float64(loanParams.TimeYr*12))
+	AUX_Y = AUX_X * MONTHLY_RATE
+	AUX_Z = (AUX_X - 1) / AUX_Y
 	loanParams.Payment = loanParams.PrinAmt / AUX_Z
 	loanParams.ErrorMsg = WS_MSG00
 }
@@ -97,9 +93,8 @@ Hay que recordar que el código COBOL ya ha sido expuesto mediante una interfaz 
 
 Utilizando la definición de dicha interfaz, es posible volver a refactorizar el código simplificando el resultado final.
 
-
 ```go 
-func loancalc(amount, interest float32, nyears int32) (payment float32, errmsg string) {
+func loancalc(amount, interest float64, nyears int32) (payment float64, errmsg string) {
 	if interest <= 0 {
 		return 0, "Invalid int. rate"
 	}
@@ -108,9 +103,9 @@ func loancalc(amount, interest float32, nyears int32) (payment float32, errmsg s
 	}
 
 	monthlyRate := (interest / 12 / 100)
-	x := math.Pow(float64(1+monthlyRate), float64(nyears*12))
-	y := float32(x) * monthlyRate
-	payment = amount / (float32(x-1) / y)
+	x := math.Pow((1 + monthlyRate), float64(nyears*12))
+	y := x * monthlyRate
+	payment = amount / ((x - 1) / y)
 
 	return payment, "OK"
 }

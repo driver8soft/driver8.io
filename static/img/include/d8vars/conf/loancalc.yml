@@ -1,0 +1,27 @@
+---
+copy:
+  - field: "PrincipalAmount"
+    type: 0
+    length: 7
+    decimal: 0
+    sign: true
+  - field: "InterestRate"
+    type: 0
+    length: 4
+    decimal: 2
+    sign: true
+  - field: "TimeYears"
+    type: 0
+    length: 2
+    decimal: 0
+    sign: true
+  - field: "Payment"
+    type: 0
+    length: 9
+    decimal: 2
+    sign: true
+  - field: "ErrorMsg"
+    type: 9
+    length: 20
+    decimal: 0
+    sign: false

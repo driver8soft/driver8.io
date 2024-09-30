@@ -21,10 +21,10 @@
            05 WS-MSG10      PIC X(20) VALUE 'INVALID INT. RATE'.
            05 WS-MSG12      PIC X(20) VALUE 'INVALID NUMBER YEARS'.
        01  AUX-VARS.
-           05 MONTHLY-RATE  USAGE IS COMP-1.
-           05 AUX-X         USAGE IS COMP-1.
-           05 AUX-Y         USAGE IS COMP-1.
-           05 AUX-Z         USAGE IS COMP-1.
+           05 MONTHLY-RATE  USAGE IS COMP-2.
+           05 AUX-X         USAGE IS COMP-2.
+           05 AUX-Y         USAGE IS COMP-2.
+           05 AUX-Z         USAGE IS COMP-2.
 
        LINKAGE SECTION.
       * Data to share with COBOL subroutines 
@@ -65,11 +65,12 @@
            END-IF.                  
        200-PROCESS.
            INITIALIZE AUX-VARS.
-           COMPUTE MONTHLY-RATE ROUNDED = (INT-RATE / 12 / 100).
-           COMPUTE AUX-X ROUNDED = ((1 + MONTHLY-RATE) ** (TIMEYR*12)).
-           COMPUTE AUX-Y ROUNDED = AUX-X * MONTHLY-RATE.
-           COMPUTE AUX-Z ROUNDED = (AUX-X - 1) / AUX-Y.
-           COMPUTE PAYMENT ROUNDED = PRIN-AMT / AUX-Z.
+           COMPUTE MONTHLY-RATE = (INT-RATE / 12 / 100).
+           COMPUTE AUX-X = ((1 + MONTHLY-RATE) ** (TIMEYR*12)).
+           COMPUTE AUX-Y = AUX-X * MONTHLY-RATE.
+           COMPUTE AUX-Z = (AUX-X - 1) / AUX-Y.
+           COMPUTE PAYMENT = PRIN-AMT / AUX-Z.
+           
            MOVE WS-MSG00 TO ERROR-MSG.
            MOVE 0 TO RETURN-CODE.
 
