@@ -322,7 +322,7 @@ Ya tenemos todo lo necesario para ejecutar nuestro programa COBOL.
 
 A continuación se explica cómo ejecutar el programa de pruebas anterior.
 
-Los ejemplos pueden descargarse directamente del repo de [GitHub](https://github.com/driver8soft/d8-examples.git)
+Los ejemplos pueden descargarse directamente del repo de [GitHub](https://github.com/driver8soft/d8-examples/tree/main/d8vars)
 
 La estructura de directorios del ejemplo (**d8vars**), es la siguiente:
 
