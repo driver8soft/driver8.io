@@ -11,7 +11,7 @@ weight: 10
 
 Cualquier programa COBOL puede ser transformado en un microservicio y desplegado en Kubernetes.
 
-Para ello, simplemente debe compilarse el programa y generar un módulo ejecutable que pueda ser invocado de manera dinámica o estática desde otro programa de aplicación. Puede consultar los [ejemplos](/es/docs/3-Examples) para aprender a realizar llamadas tanto dinámicas como estáticas.
+Para ello, simplemente debe compilarse el programa y generar un módulo ejecutable que pueda ser invocado de manera dinámica o estática desde otro programa de aplicación. Puede consultar los [ejemplos](/docs/3-examples) para aprender a realizar llamadas tanto dinámicas como estáticas.
 
 De manera análoga al comportamiento de una función en un lenguaje de programación moderno, estos programas o _subrutinas_ pueden recibir un conjunto de variables como parámetros de entrada/salida. 
 El procedimiento es sencillo, se debe codificar la cláusula `USING` en la `PROCEDURE DIVISION` replicado el número, orden y tipo de las variables utilizadas en la llamada realizada desde el programa principal.

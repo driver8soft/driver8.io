@@ -12,9 +12,13 @@ Is COBOL only valid for accessing DB2?
 
 In this simple example, we will access a PostgreSQL database from a COBOL program. 
 
-> Your programs can be precompiled (EXEC SQL) to access various SQL databases. 
+> Your programs can be precompiled (EXEC SQL) to access various SQL databases
+>
+> - Oracle Pro*Cobol
+> - IBM DB2 Cobol precompiler
+> - OpenESQL (PostgreSQL)  
 
-To run this program, you need to install PostgreSQL and create the sample database (dvdrental). Instructions on how to do this can be found [here] (https://www.postgresql.org/download/). 
+To run this program, you need to install PostgreSQL and create the sample database (dvdrental). Instructions on how to do this can be found [here](https://www.postgresql.org/download/). 
 
 {{< readfile file="/static/img/include/pgcobol.cbl" code="true" lang="cobol" >}}
 

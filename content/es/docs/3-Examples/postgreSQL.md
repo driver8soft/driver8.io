@@ -12,7 +12,11 @@ weight: 30
 
 En este sencillo ejemplo accederemos a una base de datos PostgreSQL desde un programa COBOL. 
 
-> Sus programas pueden ser pre-compilados (EXEC SQL) para acceder a distintas bases de datos SQL. 
+> Sus programas pueden ser pre-compilados (EXEC SQL) para acceder a distintas bases de datos SQL
+>
+> - Oracle Pro*Cobol
+> - IBM DB2 Cobol precompiler
+> - OpenESQL para PostgreSQL 
 
 Para poder ejecutar este programa es necesario instalar PostgreSQL y crear la base de datos de ejemplo (dvdrental). Puede encontrar las instrucciones de como hacerlo [aquí](https://www.postgresql.org/download/). 
 
